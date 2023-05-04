@@ -5,3 +5,5 @@
 # TODO Create analyses with numpy etc
 
 # TODO Create visualisations with matplot lib
+
+# TODO Host the results on a window. 
