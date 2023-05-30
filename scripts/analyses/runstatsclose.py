@@ -3,23 +3,45 @@
 import importlib.util
 import sys,os
 import yfinance as yf
-from importlib.machinery import SourceFileLoader
-spec = importlib.util.spec_from_file_location("inxlst", "scripts/imports/indexlist.py")
-
+# from .scripts.imports import spinx
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import functools
 
-# ["MMM",
-#          'AOS',
-#          'ABT',]
+ticksymlst = ["MMM",
+         'AOS',
+         'ABT',]
 
 closedata = pd.read_csv("first3close.csv")
+# TODO: Create CloseData that's all of the required tables put together. 
+
+
+# testvalue = closedata.at["2018-01-02", "AOSclose"]
+
+# calcAdvDec calculates Advance and decline for inx (a data frameindex) and ticksym (stock ticker symbol)
+# returns if the stock advanced, declined or remained the same that day
+def calcAdvDec (inx):
+    sumadvdec = 0
+    for ticksym in ticksymlst:
+      if closedata.at[inx, ticksym+"open"] - closedata.at[inx, ticksym+"close"] > 0:
+          sumadvdec += 1
+      elif closedata.at[inx, ticksym+"open"] - closedata.at[inx, ticksym+"close"] == 0:
+          continue
+      else:
+          sumadvdec -= 1
+    return sumadvdec
+
+
+# returns the series of cumulative advance and declines
+def allAdvDec(x):
+    return sum 
+
 closedata = closedata.set_index("Date")
-# closedata.set_index("DATE")
 testvalues = closedata.index
-testvalue = closedata.at["2018-01-02", "AOShigh"]
-closedata["AOS"] = list(map(lambda x: 1 if (closedata.at[x, "AOShigh"] - closedata.at[x, "AOSlow"]) > 0 else -1, closedata.index))
+closedata["AdvDec"] = list(map(calcAdvDec, testvalues))
+
+
 
 print(closedata)
 
