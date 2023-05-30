@@ -36,6 +36,7 @@ closedata = closedata.set_index("Date")
 testvalues = closedata.index
 
 
+# This caculates culmulative advance decline
 i = 0
 anslist = []
 immlist = []
@@ -53,14 +54,14 @@ closedata["sumAdvDec"] = anslist
 
 dates = closedata.index
 
+def makegraph (lstdata, ylabel, mainTitle):
+  fig, (ax0) = plt.subplots(1, 1, sharex=True, constrained_layout=True)
+  # # Price:
+  ax0.plot(dates, lstdata, label = ylabel)
+  ax0.legend(loc='upper right')
+  ax0.set_ylabel(ylabel) 
+  ax0.set_title(mainTitle, loc='left')
+  return ax0
+closegraph = makegraph(closedata["sumAdvDec"], str("culmadvdec"), 'MMM AOS ABT Advance Decline')
 
-fig, (ax0) = plt.subplots(1, 1, sharex=True, constrained_layout=True)
-# # Price:
-ax0.plot(dates, closedata["sumAdvDec"] , label='culmadvdec')
-ax0.plot(dates, closedata["AdvDec"] , label='instadvdec')
-ax0.legend(loc='upper right')
-ax0.set_ylabel('Culm advdec') 
-ax0.set_title('MMM AOS ABT stock price', loc='left')
-
-
-print(closedata)
+print(closegraph)
