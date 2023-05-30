@@ -39,12 +39,37 @@ def allAdvDec(x):
 
 closedata = closedata.set_index("Date")
 testvalues = closedata.index
-closedata["AdvDec"] = list(map(calcAdvDec, testvalues))
 
+
+# closedata["AdvDec"] = list(map(calcAdvDec, testvalues))
+
+i = 0
+anslist = []
+immlist = []
+while i < len(list(testvalues)):
+    if i > 0:
+      anslist = anslist + [anslist[i-1] + calcAdvDec(testvalues[i])]
+    else:
+        anslist = anslist + [calcAdvDec(testvalues[i])]
+    immlist = immlist + [calcAdvDec(testvalues[i])]
+    i+=1
+
+closedata["AdvDec"] = immlist
+closedata["sumAdvDec"] = anslist
+
+
+dates = closedata.index
+
+
+fig, (ax0) = plt.subplots(1, 1, sharex=True, constrained_layout=True)
+# # Price:
+ax0.plot(dates, closedata["sumAdvDec"] , label='culmadvdec')
+ax0.legend(loc='upper right')
+ax0.set_ylabel('Culm advdec') 
+ax0.set_title('MMM AOS ABT stock price', loc='left')
 
 
 print(closedata)
-
 # The Formula for Advance/Decline (A/D) Line Is:
 # A/D = Net Advances  +  { PA, if PA value exists else 0
 # where:
