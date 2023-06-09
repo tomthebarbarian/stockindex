@@ -13,6 +13,5 @@ for p in sys.path:
     print( p )
 
 
-
 from data.indexlist import spinx as ticksym
 print(ticksym)

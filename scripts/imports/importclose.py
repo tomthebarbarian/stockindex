@@ -10,7 +10,10 @@ start_date = '2018-01-01'
 end_date = '2023-04-28' 
 
 # More general reusable stuff
-symlst = inxlst.spinx
+spdata = pd.read_csv("data/SPTickerWiki.csv")
+symlst = spdata['Symbol']
+
+# symlst = inxlst.spinx
 initial = yf.download(symlst[0], start_date, end_date)
 initial[symlst[0] + 'close'] = initial.Close
 initial[symlst[0] + 'open'] = initial.Open
@@ -27,10 +30,4 @@ for sym in symlst[1:]:
 
 print(close.describe())
 
-# tempdata = pd.merge(dllst[0][["High", "Low"]], dllst[1][["High", "Low"]], suffixes=(symlst[0], symlst[1]),how='inner', on="Date")
-# tempdata = pd.merge(tempdata, dllst[2][["High", "Low"]],suffixes=("", symlst[2]), how='inner',  on="Date")
-# # tempdata = pd.concat(dllst)
-
-# print(tempdata)
-
-# close.to_csv("first3close.csv")
+close.to_csv("500close.csv")
