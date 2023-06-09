@@ -12,7 +12,6 @@ mymodule_dir = os.path.join( script_dir, '..', '..', 'data')
 sys.path.append( mymodule_dir )
 
 
-
 spdata = pd.read_csv("data/SPTickerWiki.csv")
 ticksym = spdata['Symbol']
 
