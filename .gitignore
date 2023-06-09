@@ -162,6 +162,7 @@ cython_debug/
 500close.csv
 failedDLclose.csv
 scratch.py
-
+results/DS_Store
+.DS_Store
 results/500close.csv
 results/failedDLclose.csv
