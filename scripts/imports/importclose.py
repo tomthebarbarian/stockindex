@@ -30,5 +30,7 @@ print(close.describe())
 # tempdata = pd.merge(dllst[0][["High", "Low"]], dllst[1][["High", "Low"]], suffixes=(symlst[0], symlst[1]),how='inner', on="Date")
 # tempdata = pd.merge(tempdata, dllst[2][["High", "Low"]],suffixes=("", symlst[2]), how='inner',  on="Date")
 # # tempdata = pd.concat(dllst)
+
 # print(tempdata)
-close.to_csv("first3close.csv")
+
+# close.to_csv("first3close.csv")
