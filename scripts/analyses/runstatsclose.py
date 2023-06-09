@@ -1,21 +1,20 @@
 # TODO Create analyses with numpy etc
-
-import importlib.util
 import sys,os
-import yfinance as yf
 # from .scripts.imports import spinx
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import functools
 
-ticksymlst = ["MMM",
-         'AOS',
-         'ABT',]
 
-closedata = pd.read_csv("first3close.csv")
-# TODO: Create CloseData that's all of the required tables put together. 
+script_dir = os.path.dirname( __file__ )
+mymodule_dir = os.path.join( script_dir, '..', '..', 'data')
+sys.path.append( mymodule_dir )
 
+
+spdata = pd.read_csv("data/SPTickerWiki.csv")
+ticksymlst = spdata['Symbol']
+
+closedata = pd.read_csv("results/500close.csv")
 
 
 # calcAdvDec calculates Advance and decline for inx (a data frameindex) and ticksym (stock ticker symbol)
@@ -33,7 +32,13 @@ def calcAdvDec (inx):
 
 
 closedata = closedata.set_index("Date")
-testvalues = closedata.index
+
+
+subsetdata = closedata
+# subsetdata = closedata.loc['2023-01-03':'2023-04-03']
+
+testvalues = subsetdata.index
+graphdata = subsetdata
 
 
 # This caculates culmulative advance decline
@@ -48,11 +53,11 @@ while i < len(list(testvalues)):
     immlist = immlist + [calcAdvDec(testvalues[i])]
     i+=1
 
-closedata["AdvDec"] = immlist
-closedata["sumAdvDec"] = anslist
+graphdata["AdvDec"] = immlist
+graphdata["sumAdvDec"] = anslist
 
 
-dates = closedata.index
+dates = graphdata.index
 
 def makegraph (lstdata, ylabel, mainTitle):
   fig, (ax0) = plt.subplots(1, 1, sharex=True, constrained_layout=True)
@@ -61,7 +66,10 @@ def makegraph (lstdata, ylabel, mainTitle):
   ax0.legend(loc='upper right')
   ax0.set_ylabel(ylabel) 
   ax0.set_title(mainTitle, loc='left')
-  return ax0
-closegraph = makegraph(closedata["sumAdvDec"], str("culmadvdec"), 'MMM AOS ABT Advance Decline')
+  return fig
 
-print(closegraph)
+closegraph = makegraph(graphdata["sumAdvDec"], str("culmadvdec"), 'SP500 Advance Decline')
+
+# print(closegraph)
+closegraph.show()
+plt.savefig('result/advdecplt')

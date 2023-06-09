@@ -160,4 +160,8 @@ cython_debug/
 #.idea/
 
 500close.csv
+failedDLclose.csv
 scratch.py
+
+results/500close.csv
+results/failedDLclose.csv

@@ -10,9 +10,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# ["MMM",
-#          'AOS',
-#          'ABT',]
 
 highlowdata = pd.read_csv("first3highlow.csv")
 highlowdata = highlowdata.set_index("Date")
