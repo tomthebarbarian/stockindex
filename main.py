@@ -8,10 +8,14 @@
 
 # TODO Host the results on a window. 
 import sys
-
+from flask import Flask
 for p in sys.path:
     print( p )
 
+app = Flask(__name__)
 
-from data.indexlist import spinx as ticksym
-print(ticksym)
+def home():
+    return "some text on teh page"
+
+if __name__ == "__main__":
+    app.run(debug=True)
