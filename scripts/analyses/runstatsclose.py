@@ -4,7 +4,7 @@ import sys,os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import matplotlib.ticker as plticker
 
 script_dir = os.path.dirname( __file__ )
 mymodule_dir = os.path.join( script_dir, '..', '..', 'data')
@@ -23,11 +23,11 @@ def calcAdvDec (inx):
     sumadvdec = 0
     for ticksym in ticksymlst:
       if closedata.at[inx, ticksym+"open"] - closedata.at[inx, ticksym+"close"] > 0:
-          sumadvdec += 1
+          sumadvdec -= 1
       elif closedata.at[inx, ticksym+"open"] - closedata.at[inx, ticksym+"close"] == 0:
           continue
       else:
-          sumadvdec -= 1
+          sumadvdec += 1
     return sumadvdec
 
 
@@ -63,6 +63,7 @@ def makegraph (lstdata, ylabel, mainTitle):
   fig, (ax0) = plt.subplots(1, 1, sharex=True, constrained_layout=True)
   # # Price:
   ax0.plot(dates, lstdata, label = ylabel)
+  ax0.set_xticks(ax0.get_xticks()[::20])
   ax0.legend(loc='upper right')
   ax0.set_ylabel(ylabel) 
   ax0.set_title(mainTitle, loc='left')
@@ -72,4 +73,5 @@ closegraph = makegraph(graphdata["sumAdvDec"], str("culmadvdec"), 'SP500 Advance
 
 # print(closegraph)
 closegraph.show()
-plt.savefig('result/advdecplt')
+plt.savefig('results/graphs/advdecplt2019.png')
+# plt.savefig('results/graphs/advdecplt.png')

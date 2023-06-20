@@ -4,7 +4,7 @@ import yfinance as yf
 import pandas as pd
 import dask
 
-start_date = '2023-01-01' 
+start_date = '2019-01-01' 
 end_date = '2023-04-28' 
 
 # More general reusable stuff
