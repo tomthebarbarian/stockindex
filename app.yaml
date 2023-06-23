@@ -3,11 +3,4 @@ runtime_config:
     operating_system: "ubuntu22"
     runtime_version: "3.10"
 env: flex
-network:
-  forwarded_ports:
-    - 8080/tcp
 entrypoint: gunicorn -b :$PORT -b :8080 main:app
-
-libraries:
-  - name: ssl
-    version: latest
