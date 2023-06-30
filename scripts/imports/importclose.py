@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 today = datetime.today()
 
 # Format the date as a string
-enddate = (today - timedelta(days=1)).strftime('%Y-%m-%d')
+end_date = (today - timedelta(days=1)).strftime('%Y-%m-%d')
 start_date = (today - timedelta(days=21)).strftime('%Y-%m-%d')
 
 # More general reusable stuff

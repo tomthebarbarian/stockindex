@@ -19,3 +19,12 @@ sys.path.append( mymodule_dir )
 # Colour it bullish if score is <200, and bearish if >1000
 
 # TODO: Should probably make a bargraph comparing the percentages and donut chart of the biggest contributors to low/high scores
+
+spdata = pd.read_csv("data/SPTickerWiki.csv")
+columnnames = spdata.columns
+GICSSectors = spdata['GICS Sector'].unique()
+databysector = {}
+for sector in GICSSectors:
+    databysector[sector] = spdata['Symbol'][spdata['GICS Sector'] == sector]
+
+print(databysector)
