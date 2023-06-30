@@ -3,9 +3,14 @@
 import yfinance as yf
 import pandas as pd
 import dask
+from datetime import datetime, timedelta
 
-start_date = '2019-01-01' 
-end_date = '2023-04-28' 
+# Date Format YYYY-MM-DD
+today = datetime.today()
+
+# Format the date as a string
+enddate = (today - timedelta(days=1)).strftime('%Y-%m-%d')
+start_date = (today - timedelta(days=21)).strftime('%Y-%m-%d')
 
 # More general reusable stuff
 spdata = pd.read_csv("data/SPTickerWiki.csv")
