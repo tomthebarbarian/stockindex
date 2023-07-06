@@ -24,7 +24,32 @@ spdata = pd.read_csv("data/SPTickerWiki.csv")
 columnnames = spdata.columns
 GICSSectors = spdata['GICS Sector'].unique()
 databysector = {}
+
+# Create lists by sector
 for sector in GICSSectors:
-    databysector[sector] = spdata['Symbol'][spdata['GICS Sector'] == sector]
+    databysector[sector] = [spdata['Symbol'][spdata['GICS Sector'] == sector]]
+
+for sym in symlst[1:]: 
+  try: 
+    data = yf.download(sym, start_date, end_date)
+    data[sym + 'close'] = data.Close
+    data[sym + 'open'] = data.Open
+    close = pd.merge(close, data[[sym + 'close', sym + 'open']], how='inner', on="Date")
+  except:
+    failedLst = failedLst + [sym]
+    continue
+
+def calcAdvDec (inx):
+    sumadvdec = 0
+    for ticksym in ticksymlst:
+      if closedata.at[inx, ticksym+"open"] - closedata.at[inx, ticksym+"close"] > 0:
+          sumadvdec -= 1
+      elif closedata.at[inx, ticksym+"open"] - closedata.at[inx, ticksym+"close"] == 0:
+          continue
+      else:
+          sumadvdec += 1
+    return sumadvdec
+
+
 
 print(databysector)
