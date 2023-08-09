@@ -56,9 +56,7 @@ for sector in GICSSectors:
 
     if np.mean(closeData[colname]) < closeData.at[end_date,colname]:
        sectorAdvDec += 1
-    elif np.mean(closeData[colname]) > closeData.at[end_date,colname]:
-       sectorAdvDec -= 1
-    print(sectorAdvDec, "interior")
+    print(sectorAdvDec, sym)
   if sectorAdvDec < 0:
      sectorAdvDec = 0
   else:
@@ -66,5 +64,6 @@ for sector in GICSSectors:
   print(sectorAdvDec, sector)
   sumPercAdvDec += sectorAdvDec
   advDecPerSector += [sector, sectorAdvDec]
+
 print(sumPercAdvDec)
 
