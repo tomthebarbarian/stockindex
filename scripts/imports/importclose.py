@@ -2,7 +2,7 @@
 
 import yfinance as yf
 import pandas as pd
-import dask
+# import dask
 from datetime import datetime, timedelta
 
 # Date Format YYYY-MM-DD
@@ -10,7 +10,7 @@ today = datetime.today()
 
 # Format the date as a string
 end_date = (today - timedelta(days=1)).strftime('%Y-%m-%d')
-start_date = (today - timedelta(days=21)).strftime('%Y-%m-%d')
+start_date = (today - timedelta(days=40)).strftime('%Y-%m-%d')
 
 # More general reusable stuff
 spdata = pd.read_csv("data/SPTickerWiki.csv")
