@@ -5,7 +5,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
-import yfinance as yf
+from sqlalchemy import create_engine
+import psycopg2
 
 script_dir = os.path.dirname( __file__ )
 mymodule_dir = os.path.join( script_dir, '..', '..', 'data')
@@ -26,19 +27,27 @@ from datetime import datetime, timedelta
 
 # TODO: Should probably make a bargraph comparing the percentages and donut chart of the biggest contributors to low/high scores
 
+
 spdata = pd.read_csv("data/SPTickerWiki.csv")
 columnnames = spdata.columns
 GICSSectors = spdata['GICS Sector'].unique()
 
 databysector = {}    
-closeData = pd.read_csv("results/500close.csv")
-closeData = closeData.set_index("Date")
+# closeData = pd.read_csv("results/500close.csv")
 
+
+alchemyEngine   = create_engine('postgresql+psycopg2://test:@127.0.0.1:5432/stockindex', pool_recycle=3600)
+dbConnection    = alchemyEngine.connect()
+closeData       = pd.read_sql("select * from \"spclose\"", dbConnection)
+pd.set_option('display.expand_frame_repr', False)
+
+# closeData = closeData.set_index("Date")
 
 # Date Format YYYY-MM-DD
 today = datetime.today()
 # end_date = (today - timedelta(days=1)).strftime('%Y-%m-%d')
-end_date = '2023-08-04'
+# end_date = '2023-08-04'
+end_date = datetime.strptime('2023-08-04', '%Y-%m-%d').date()
 
 # 
 sumPercAdvDec = 0
@@ -52,9 +61,8 @@ for sector in GICSSectors:
   # print(databysector[sector])
   for sym in databysector[sector]: 
     colname = sym + "close"
-    valatloc = closeData.at[end_date,colname]
-
-    if np.mean(closeData[colname]) < closeData.at[end_date,colname]:
+    valatloc = closeData[(closeData["Date"] == end_date)][colname].values[0]
+    if np.mean(closeData[colname]) < valatloc:
        sectorAdvDec += 1
     print(sectorAdvDec, sym)
   if sectorAdvDec < 0:
