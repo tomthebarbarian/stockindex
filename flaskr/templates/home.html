@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Flask Tutorial</title>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block scripts %}
+    {{ super() }}
+    {{ datepicker.loader() }} {# to load jQuery-ui #}
+    {{ datepicker.picker(id=".dp") }}
+    {% endblock %}
+
+    {% block content %}
+    <div class="main">
+    <h2>Today's SP market Breadth is: </h2>
+    <p>{{currbreadth}} out of 1100</p>
+    </div>
+    {% endblock %}
+  </body>
+  <script></script>
+</html>
