@@ -1,6 +1,6 @@
-runtime: python
+runtime: python39
 runtime_config:
     operating_system: "ubuntu22"
-    runtime_version: "3.10"
+    runtime_version: "3.11"
 env: standard
 entrypoint: gunicorn -b :$PORT main:app
