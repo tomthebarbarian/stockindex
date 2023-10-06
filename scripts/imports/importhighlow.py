@@ -2,9 +2,7 @@
 
 import yfinance as yf
 import indexlist as inxlst
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
 start_date = '2018-01-01' 
 end_date = '2023-04-28' 

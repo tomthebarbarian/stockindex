@@ -4,7 +4,6 @@ import sys,os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.ticker as plticker
 
 script_dir = os.path.dirname( __file__ )
 mymodule_dir = os.path.join( script_dir, '..', '..', 'data')
@@ -74,4 +73,3 @@ closegraph = makegraph(graphdata["sumAdvDec"], str("culmadvdec"), 'SP500 Advance
 # print(closegraph)
 closegraph.show()
 plt.savefig('results/graphs/advdecplt2019.png')
-# plt.savefig('results/graphs/advdecplt.png')

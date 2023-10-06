@@ -6,11 +6,18 @@
   </head>
   <body>
     {% extends "template.html" %}
+    {% block scripts %}
+    {{ super() }}
+    {{ datepicker.loader() }} {# to load jQuery-ui #}
+    {{ datepicker.picker(id=".dp") }}
+    {% endblock %}
+
     {% block content %}
-    
-    <h1> My First Try Using Flask </h1>
-    <p> Flask is Fun </p>
-    
+    <div class="main">
+    <h2>Today's SP market Breadth is: </h2>
+    <p>{{currbreadth}} out of 1100</p>
+    </div>
     {% endblock %}
   </body>
+  <script></script>
 </html>
