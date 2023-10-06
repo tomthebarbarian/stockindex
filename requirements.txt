@@ -5,7 +5,6 @@ Werkzeug
 gunicorn
 numpy 
 pandas
-matplotlib.pyplot
-matplotlib.ticker
+matplotlib
 datetime
 yfinance
