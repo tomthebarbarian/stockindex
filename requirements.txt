@@ -1,3 +1,11 @@
 Flask
+# flask_bootstrap
+# flask_datepicker
 Werkzeug
 gunicorn
+numpy 
+pandas
+matplotlib.pyplot
+matplotlib.ticker
+datetime
+yfinance

@@ -159,10 +159,10 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-500close.csv
+# 500close.csv
 failedDLclose.csv
 scratch.py
 results/DS_Store
 .DS_Store
-results/500close.csv
+# results/500close.csv
 results/failedDLclose.csv

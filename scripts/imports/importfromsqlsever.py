@@ -1,8 +1,6 @@
 from sqlalchemy import create_engine
-import psycopg2
 import numpy as np
 import pandas as pd
-from datetime import datetime, timedelta
 
 alchemyEngine   = create_engine('postgresql+psycopg2://tomzhang:admin@127.0.0.1:5432/stockindex', pool_recycle=3600)
 # alchemyEngine   = create_engine('postgresql+psycopg2://test:@127.0.0.1:5432/stockindex', pool_recycle=3600)
